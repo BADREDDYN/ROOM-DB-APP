@@ -1,10 +1,10 @@
-package com.roomdb.app.model
+package com.roomdb.app.model.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "posts_table")
-data class Post(
+data class PostEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val userId: Int,
