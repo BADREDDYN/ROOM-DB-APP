@@ -1,4 +1,4 @@
-package com.roomdb.app.model.local
+package com.roomdb.app.model.local.room
 
 import android.content.Context
 import androidx.room.Database
@@ -16,18 +16,16 @@ abstract class PostsDatabase : RoomDatabase() {
         @Volatile
         private var mInstance: PostsDatabase? = null
 
-        fun mGetInstance(mContext: Context): PostsDatabase {
-            return mInstance ?: synchronized(Any()) {
+        fun mGetInstance(mContext: Context): PostsDatabase =
+            mInstance ?: synchronized(Any()) {
                 mInstance ?: mBuildDatabase(mContext).also { mInstance = it }
             }
-        }
 
-        private fun mBuildDatabase(mContext: Context): PostsDatabase {
-            return Room.databaseBuilder(
+        private fun mBuildDatabase(mContext: Context): PostsDatabase =
+            Room.databaseBuilder(
                 mContext.applicationContext, PostsDatabase::class.java,
                 mDATABASE_NAME
             ).fallbackToDestructiveMigration().build()
-        }
     }
 
 }
