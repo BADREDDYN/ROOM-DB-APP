@@ -3,7 +3,6 @@ package com.roomdb.app.ui.main
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.roomdb.app.R
@@ -11,6 +10,7 @@ import com.roomdb.app.databinding.ActivityMainBinding
 import com.roomdb.app.model.local.room.PostEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     //ViewModel
-    private lateinit var vm: MainViewModel
+    private val vm by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
         //Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //ViewModel
-        vm = ViewModelProvider(this)[MainViewModel::class.java]
 
         //Add random post to posts_table
         binding.btnAddRandomPost.setOnClickListener {
